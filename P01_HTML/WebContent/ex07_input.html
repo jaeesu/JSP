@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>input tag </title>
+</head>
+<body>
+<!-- 
+	# form tag
+		사용자가 입력한 데이터를 서버에 전송시키기 위해서 사용
+		속성
+		action : form 전송 할 서버쪽 파일 지정
+		name : form 식별자
+		target : form에 입력된 데이터가 서버를 거쳐 처리된 결과 표시할 프레임
+		method : form을 서버에 전송하는 http 메서드 지정
+	# input tag
+		form 태그 안에 사용하는 요소 중에서 가장 주요한 요소
+		사용자로부터 데이터를 입력받음
+		속성
+		type : 입력 태그 형태
+		name : 서버에 전달되는 이름
+		value : 입력 변수(태그) 초기값
+	# label tag
+		input tag text 이름 지정
+-->
+	<form action="#" method = "get">
+		<fieldset> <!-- border -->
+			<legend> input contents </legend> <!-- border name -->
+			<label> ID </label>
+			<input type="text" id="userid" name="userid" maxlength="10"><br>
+			<br>
+			<label> PASSWORD </label>
+			<input type="password" id="userpwd" name="userpwd" maxlength="20"><br>
+			<label> SELF INTRODUCTION </label><br>
+			<textarea id = "memo" name="memo" rows="5" cols="50"></textarea>
+			<br>
+			<label> SECRET LAYER </label>
+			<input type="hidden" id="secret" name="secret" value="secret">
+			<br>
+			<input type="submit" id="submit">
+		</fieldset>
+	</form>
+</body>
+</html>

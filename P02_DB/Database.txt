@@ -1,0 +1,17 @@
+
+<Database.txt>
+
+# DB ( database )
+	전자방식으로 저장된 구조화된 정보, 데이터의 체계적인 집합
+	데이터베이스 관리 시스템(DBMS)에 의해 제어됨
+	
+# DBMS (Database Management System)
+	데이터를 편리하게 저장, 효율적으로 관리하고 검색할 수 있는 환경을 제공하는 시스템 sw
+	
+#서비스 확인 : 제어판 - 관리도구 - 서비스
+servicexe
+xetnslistener
+제어판 서비스 항목에서 oracle 리스너, 서비스 두개가 잘 실행이 되고 있는지 확인
+
+# sqldeveloper 실행 안될 때
+	java - jkd - jre - bin (msvcr100.dll)

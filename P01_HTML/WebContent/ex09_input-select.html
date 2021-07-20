@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>select tag</title>
+</head>
+<body>
+<!-- 
+	# select tag
+		드롭다운 사용 여러개의 목록 정의
+		서버에 전송되는 데이터 : select.name.key | option.value.value
+	# option tag
+		select 안 목록 생성
+	# optgroup tag
+		option 태그 그룹화
+-->
+	<h1> select tag </h1><br>
+	<form action="#">
+		<fieldset>
+			<legend>통신사</legend>
+			<label for = "telecom">selection</label>
+			<select id = "telecom" name="telecom">
+				<option value="KT">KT</option>
+				<option value="SKT">SKT</option>
+				<option value="U+">U+</option>
+			</select>
+		</fieldset>
+		
+		<fieldset>
+			<legend>car</legend>
+			<select id = "carList" name="carList">
+				<optgroup label = "국내">
+					<option value="현대">현대</option>
+					<option value="기아">기아</option>
+					<option value="쌍용">쌍용</option>
+				</optgroup>
+				<optgroup label = "해외">
+					<option value="benz">benz</option>
+					<option value="audi">audi</option>
+					<option value="bmw">bmw</option>
+				</optgroup>
+			</select>
+		</fieldset>
+		
+		<br>
+		<input type="submit" vaule="submit">
+	</form>
+</body>
+</html>

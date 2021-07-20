@@ -1,0 +1,23 @@
+< JavaBean.txt >
+
+# JavaBean
+	데이터 표현하는 목적의 class
+	> DB 데이터 처리 : 하나의 데이블에서는 DTO(VO), DAO가 한 세트
+	
+# DTO(Data Transfer Object) VO (Value Object)
+	데이터를 db로 보내거나 db로부터 레코드를 가져올 때 하나의 객체를 만드는 클래스
+	db 접근 객체
+	
+# DAO(Data Access Object)
+	해당 db 접근 관리
+	객체화된 DTO를 가지고 db에 접속할 때 사용되는 메서드를 정의한 클래스
+	실제 데이터를 가지고 있음
+	실제 접근, 쿼리문을 나타냄
+	
+> 보낼 때 객체화해서 보내고 그것을 처리
+
+# javabean 규칙
+	클래스는 반드시 특정 패키지 소속
+	DTO의 멤버필드(변수)를 property, property의 접근지정자는 privat으로 설정
+	멤버필드마다 별도의 getter/setter 필요 -메서드의 접근 지정자는 public
+	기본 생성자가 있어야 함

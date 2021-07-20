@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>table</title>
+</head>
+<body>
+<!-- 
+	# table tag
+		표를 만드는 태그
+	# caption tag
+		표 제목
+	# table tag 사용
+		tr : make row
+		th : table header, 가운데 정렬, 진하게 속성 자동 부여
+		td : make col(열)
+		테이블 만드는 순서 : 테이블 정의, tr, 행을 나누어 셀 td 만듦
+	# symmentic tag
+		표의 구조, 제목, 본문, 요약
+		시각장애인도 화면 판독기를 사용해서 구조 이해 가능
+		thead : 표 머리말 그룹 태그
+		tbody : 표 본문 그룹 태그
+		tfoot : 표 꼬리말 그룹 태그
+-->
+
+	<table width = "300" border="1" align="center">
+		<caption> table </caption>
+		<thead>
+			<tr>
+				<th>No</th><th>point</th>
+			</tr>
+		</thead>
+		<tbody align="center">
+			<tr>
+				<td>1</td><td>가입 : 1000</td>
+			</tr>
+			<tr>
+				<td>2</td><td>획득 : 1000</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>합계</th><th>2000</th>
+			</tr>
+		</tfoot>
+	</table>
+</body>
+</html>
