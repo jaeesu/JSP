@@ -150,7 +150,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="BBS" path="/BBS" reloadable="true" source="org.eclipse.jst.jee.server:BBS"/><Context docBase="P01_HTML" path="/P01_HTML" reloadable="true" source="org.eclipse.jst.jee.server:P01_HTML"/><Context docBase="P02_DB" path="/P02_DB" reloadable="true" source="org.eclipse.jst.jee.server:P02_DB"/><Context docBase="P03_JDBC" path="/P03_JDBC" reloadable="true" source="org.eclipse.jst.jee.server:P03_JDBC"/><Context docBase="multiplication" path="/multiplication" reloadable="true" source="org.eclipse.jst.jee.server:multiplication"/></Host>
+      <Context docBase="BBS" path="/BBS" reloadable="true" source="org.eclipse.jst.jee.server:BBS"/><Context docBase="P03_JDBC" path="/P03_JDBC" reloadable="true" source="org.eclipse.jst.jee.server:P03_JDBC"/><Context docBase="multiplication" path="/multiplication" reloadable="true" source="org.eclipse.jst.jee.server:multiplication"/><Context docBase="P05_School" path="/P05_School" reloadable="true" source="org.eclipse.jst.jee.server:P05_School"/><Context docBase="P06_Servlet" path="/P06_Servlet" reloadable="true" source="org.eclipse.jst.jee.server:P06_Servlet"/></Host>
     </Engine>
   </Service>
 </Server>

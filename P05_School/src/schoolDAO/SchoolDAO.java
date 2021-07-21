@@ -5,8 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import dbtestDTO.DBtestDTO;
 import schoolDTO.SchoolDTO;
 
 public class SchoolDAO {
@@ -15,7 +16,7 @@ public class SchoolDAO {
 			Class.forName("oracle.jdbc.OracleDriver");
 			//System.out.println("로딩 성공");
 		}catch(ClassNotFoundException e) {
-			//System.out.println("로딩 실패");
+			System.out.println("로딩 실패");
 			e.printStackTrace();
 		}
 	}
@@ -30,17 +31,18 @@ public class SchoolDAO {
 			con = DriverManager.getConnection(url, user, pwd);
 			//System.out.println("success");
 		}catch(SQLException e) {
-			//System.out.println("fail");
+			System.out.println("fail");
 			e.printStackTrace();
 		}
 		
 		return con;
 	} //getConnection() end
 
-	public int insert(SchoolDTO dto) {
+	public boolean insert(SchoolDTO dto) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int su = 0;
+		boolean check = false;
 		
 		String sql = "insert into school values (?, ?, ?)";
 		
@@ -51,7 +53,11 @@ public class SchoolDAO {
 			pstmt.setString(1, dto.getName());
 			pstmt.setString(2, dto.getValue());
 			pstmt.setInt(3, dto.getCode());
+			
 			su = pstmt.executeUpdate();
+			
+			if(su > 0) check = true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -62,42 +68,69 @@ public class SchoolDAO {
 				e.printStackTrace();
 			}
 		}
-		return su;
+		
+		return check;
 	}
 	
-	public int update(SchoolDTO dto) {
+	public void select(SchoolDTO dto) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		int su = 0;
+		ResultSet res = null;
 		
-		String sql = "update school set value=?, code=? where name = ?";
+		String sql = null;
+		
+		if(dto == null) {
+			sql = "select * from school";
+		}else if (dto.getName() != null) {
+			sql = "select * from school where name like ?";
+		}else {
+			sql = "select * from school where code = ?";
+		}
+		
 		try {
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
+			if(dto != null) {
+				if(dto.getName() != null) {
+					pstmt.setString(1, "%"+dto.getName()+"%");
+				} else {
+					pstmt.setInt(1, dto.getCode());
+				}
+			}
+			res = pstmt.executeQuery();
+			while(res.next()) {
+				String name = res.getString("name");
+				String value = res.getString("value");
+				int code = res.getInt("code");
+				
+				String valueTitle = "";
+				if(code == 1) {
+					valueTitle = "학번";
+				} else if(code == 2) {
+					valueTitle = "과목";
+				} else if(code == 3) {
+					valueTitle = "부서";
+				}
+				System.out.println(String.format("%-5s %-10s %-5s %-10s %-5s %-10d", "NAME", name, valueTitle , value,  "CODE", code));
+
+			}
 			
-			pstmt.setString(1, dto.getValue());
-			pstmt.setInt(2, dto.getCode());
-			pstmt.setString(3, dto.getName());
-			
-			su = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				if(pstmt != null) pstmt.close();
 				if(con != null) con.close();
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return su;
 	}
-	
-	public int delete(String name) {
+
+	public boolean delete(String name) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		int su = 0;
+		boolean check = false;
 		
 		String sql = "delete school where name = ?";
 		
@@ -105,7 +138,9 @@ public class SchoolDAO {
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
-			su = pstmt.executeUpdate();
+			
+			int su = pstmt.executeUpdate();
+			if(su != 0) check = true;
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -119,25 +154,25 @@ public class SchoolDAO {
 				e.printStackTrace();
 			}
 		}
-		return su;
+		return check;
 	}
 	
-	public void list() {
-		Connection con = getConnection();
+	public List<SchoolDTO> getList() {
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
+		ArrayList<SchoolDTO> list = new ArrayList<SchoolDTO>();
+
+		String sql = "select * from school";
 		
-		try {
-			String sql = "select * from school";
+		try {	
+			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			res = pstmt.executeQuery();
 			
 			while(res.next()) {
-				String name = res.getString("name");
-				String value = res.getString("value");
-				int code = res.getInt("code");
-				
-				System.out.println("이름 : " + name + "\t" + value + "\t코드 : " + code);
+				SchoolDTO dto = new SchoolDTO(res.getString("name"), res.getString("value"), res.getInt("code"));
+				list.add(dto);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -151,7 +186,7 @@ public class SchoolDAO {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	
+		if(list.isEmpty()) list = null;
+		return list;
+	}//getList() end
 }

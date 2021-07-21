@@ -14,6 +14,10 @@ public class SchoolDTO {
 	private String value;
 	private int code;
 	
+	public SchoolDTO() {
+		
+	}
+	
 	public SchoolDTO(String name, String value, int code) {
 		this.name = name;
 		this.value = value;
